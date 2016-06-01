@@ -15,8 +15,9 @@ namespace InterpreteTarot
             ArcanoMayor, Oro, Copa, Espada
         }
         static string[] numerosFiguras = "As;Dos;Tres;Cuatro;Cinco;Seis;Siete;Ocho;Nueve;Diez;Sota;Caballo;Reina;Rey".Split(';');
-        static string ExtensionCarta = ".CartaTarot";
-        public static string pathCartas =Environment.CurrentDirectory+Path.AltDirectorySeparatorChar +"Cartas";
+        public static string ExtensionCarta = ".CartaTarot";
+        public static readonly string pathCartasCarpetaGuardado= Environment.CurrentDirectory + Path.AltDirectorySeparatorChar + "Cartas";
+        public static string pathCartasCargar =pathCartasCarpetaGuardado;
         string nombre;
         Bitmap imagen;
         string significado;
@@ -30,7 +31,7 @@ namespace InterpreteTarot
         string estacion;
         string palabrasClave;
         Formato formato;
-
+        
 
         public CartaTarot()
         {
@@ -292,17 +293,21 @@ namespace InterpreteTarot
         }
         public static void GuardarCarta(CartaTarot carta)
         {
-            if (!Directory.Exists(pathCartas))
-                Directory.CreateDirectory(pathCartas);
-            carta.GetBytes().Save(pathCartas + Path.DirectorySeparatorChar + carta.Nombre + ExtensionCarta);
+            if (!Directory.Exists(pathCartasCarpetaGuardado))
+                Directory.CreateDirectory(pathCartasCarpetaGuardado);
+            carta.GetBytes().Save(pathCartasCarpetaGuardado + Path.DirectorySeparatorChar + carta.Nombre + ExtensionCarta);
         }
         public static CartaTarot[] Cargar()
         {
             List<CartaTarot> cartas = new List<CartaTarot>();
             try
             {
-                foreach (FileInfo file in new DirectoryInfo(pathCartas).GetFiles())
-                    cartas.Add(CargarCarta(file.FullName));
+                foreach (FileInfo file in new DirectoryInfo(pathCartasCargar).GetFiles())
+                    try
+                    {
+                        cartas.Add(CargarCarta(file.FullName));
+                    }
+                    catch { }
             }
             catch (Exception m){
 

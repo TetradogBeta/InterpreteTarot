@@ -48,11 +48,15 @@
                 <Viewbox Grid.Row="0">
                     <TextBlock Text="Significado"/>
                 </Viewbox>
-                <TextBlock Grid.Row="1" Name="txtSignificadoCarta"/>
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <TextBlock Name="txtSignificadoCarta" TextWrapping="Wrap" FontSize="20"/>
+                </ScrollViewer>
                 <Viewbox Grid.Row="2">
                     <TextBlock Text="Posicion" Name="tblPosicion"/>
                 </Viewbox>
-                <TextBlock Grid.Row="3" Name="txtSignificadoPosicion"/>
+                <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto">
+                    <TextBlock  Name="txtSignificadoPosicion" TextWrapping="Wrap" FontSize="20" />
+                </ScrollViewer>
             </Grid>
 
         </Grid>
@@ -63,7 +67,7 @@
                 <ColumnDefinition Width="23*"/>
                 <ColumnDefinition Width="23*"/>
             </Grid.ColumnDefinitions>
-            <ListBox Grid.Column="0" Name="lstPalabrasClave"/>
+            <ListBox Grid.Column="0" Name="lstPalabrasClave" />
             <local:CartaSelector Grid.Column="1" x:Name="cslPasado" Seleccionada="csl_Seleccionada"/>
             <local:CartaSelector Grid.Column="2" x:Name="cslPresente" Seleccionada="csl_Seleccionada"/>
             <local:CartaSelector Grid.Column="3" x:Name="cslFuturo" Seleccionada="csl_Seleccionada"/>

@@ -27,7 +27,7 @@ namespace InterpreteTarot
             cslPasado.Carta = cartaPasado;
             cslPresente.Carta = cartaPresente;
             cslFuturo.Carta = cartaFuturo;
-            VisualizaCarta(cartaPasado, PosicionCartas.Pasado);
+            cslPasado.Seleccionado = true;
 
         }
 
@@ -47,10 +47,13 @@ namespace InterpreteTarot
             imgCarta.SetImage(carta.Imagen);
             if (carta.Signo1 != null)
                 imgSigno1.SetImage(carta.Signo1);
+            else imgSigno1.SetImage(Colors.White.ToBitmap(1, 1));
             if (carta.Signo2 != null)
-                imgSigno1.SetImage(carta.Signo2);
+                imgSigno2.SetImage(carta.Signo2);
+            else imgSigno2.SetImage(Colors.White.ToBitmap(1, 1));
             if (carta.Signo3!= null)
-                imgSigno1.SetImage(carta.Signo3);
+                imgSigno3.SetImage(carta.Signo3);
+            else imgSigno3.SetImage(Colors.White.ToBitmap(1, 1));
             txtSignificadoCarta.Text = carta.Significado;
             tblPosicion.Text = posicion.ToString();
             switch(posicion)

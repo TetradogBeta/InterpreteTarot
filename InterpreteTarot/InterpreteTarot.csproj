@@ -35,7 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gabriel.Cat.Binaris">
+    <Reference Include="Gabriel.Cat.Binaris, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\pc\Desktop\Programas\Gabriel.Cat.Binaris\bin\Release\Gabriel.Cat.Binaris.dll</HintPath>
     </Reference>
     <Reference Include="Gabriel.Cat.Utilitats">
