@@ -1,0 +1,41 @@
+﻿<Window x:Class="InterpreteTarot.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InterpreteTarot"
+        mc:Ignorable="d"
+        Title="Interprete Tarot" Height="350" Width="525">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="137*"/>
+            <ColumnDefinition Width="380*"/>
+        </Grid.ColumnDefinitions>
+        <UniformGrid x:Name="ugCartasTarot" Grid.Column="0"/>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="56*"/>
+                <RowDefinition Height="235*"/>
+                <RowDefinition Height="29*"/>
+            </Grid.RowDefinitions>
+            <Viewbox Grid.Row="0">
+                <TextBlock  Text="Tirada Pasado-Prestente-Futuro"  Foreground="Purple"/>
+            </Viewbox>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Image x:Name="imgPasado" Grid.Column="1" MouseLeftButtonUp="QuitarCartaDeLaTirada" />
+                <Image x:Name="imgPresente" Grid.Column="3" MouseLeftButtonUp="QuitarCartaDeLaTirada"/>
+                <Image x:Name="imgFuturo" Grid.Column="5" MouseLeftButtonUp="QuitarCartaDeLaTirada"/>
+            </Grid>
+            <Button x:Name="btnInterpretar" Content="Interpretar" Grid.Row="2" Background="White" Foreground="Gold" FontSize="18" Click="btnInterpretar_Click"/>
+        </Grid>
+    </Grid>
+</Window>
