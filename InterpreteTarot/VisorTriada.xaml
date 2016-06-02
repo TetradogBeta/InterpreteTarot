@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InterpreteTarot"
         mc:Ignorable="d"
-        Title="Visor Tirada" Height="300" Width="300">
+        Title="Visor Tirada" Height="320.397" Width="516.714">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25*"/>
@@ -48,13 +48,13 @@
                 <Viewbox Grid.Row="0">
                     <TextBlock Text="Significado"/>
                 </Viewbox>
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                <TextBlock Name="txtSignificadoCarta" TextWrapping="Wrap" FontSize="20"/>
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" x:Name="scrSignificado">
+                    <TextBlock Name="txtSignificadoCarta" TextWrapping="Wrap" FontSize="20"/>
                 </ScrollViewer>
                 <Viewbox Grid.Row="2">
                     <TextBlock Text="Posicion" Name="tblPosicion"/>
                 </Viewbox>
-                <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto">
+                <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto" x:Name="scrPosicion">
                     <TextBlock  Name="txtSignificadoPosicion" TextWrapping="Wrap" FontSize="20" />
                 </ScrollViewer>
             </Grid>

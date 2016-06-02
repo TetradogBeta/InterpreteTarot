@@ -52,7 +52,29 @@ namespace InterpreteTarot
 
         private void CreadorDeCartas(object sender, RoutedEventArgs e)
         {
-            new WinEditorCreadorCartas().ShowDialog();
+            WinEditorCreadorCartas creador = new WinEditorCreadorCartas();
+            Image imgCarta=null;
+            creador.ShowDialog();
+            if (!cartasCargadas.Existeix(creador.Carta.Nombre)||MessageBox.Show("Ya Existe quieres reemplazarla?","Atención",MessageBoxButton.YesNo,MessageBoxImage.Asterisk)==MessageBoxResult.Yes)
+            {
+                if(cartasCargadas.Existeix(creador.Carta.Nombre))
+                {
+                    //la quito
+                    ugCartasTarot.Children.WhileEach((carta) => {
+                        imgCarta = carta as Image;
+                        if ((imgCarta.Tag as CartaTarot).Nombre==creador.Carta.Nombre)
+                        {
+                            cartasCargadas.Elimina(creador.Carta.Nombre);
+                        }
+                    return cartasCargadas.Existeix(creador.Carta.Nombre);
+
+                    });
+                    ugCartasTarot.Children.Remove(imgCarta);
+
+                }
+                CargarCarta(creador.Carta);
+            }
+
         }
         private void CargarCartas(object sender, RoutedEventArgs e)
         {
@@ -63,10 +85,8 @@ namespace InterpreteTarot
         {
             CartaTarot[] cartasCargadas = CartaTarot.Cargar();
             WinForms.FolderBrowserDialog folderCartas;
-            Image cartaACargar;
-            ContextMenu contextMenuCartas;
-            MenuItem itemMenu;
-            string hexCarta = "";
+
+            string nombreCarta = "";
             if (cartasCargadas.Length == 0)
             {
                 if (ugCartasTarot.Children.Count == 0)
@@ -85,81 +105,83 @@ namespace InterpreteTarot
                 //las cargo :D
                 for (int i = 0; i < cartasCargadas.Length; i++)
                 {
-                    hexCarta = cartasCargadas[i].GetBytes().ToHex();
-                    if (!this.cartasCargadas.Existeix(hexCarta))
-                    {
-                        this.cartasCargadas.Afegir(hexCarta, cartasCargadas[i]);
-                        contextMenuCartas = new ContextMenu();
-                        cartaACargar = new Image();
-                        itemMenu = new MenuItem();
-                        itemMenu.Header = "Crear Carta";
-                        itemMenu.Click += CreadorDeCartas;
-                        contextMenuCartas.Items.Add(itemMenu);
-
-                        itemMenu = new MenuItem();
-                        itemMenu.Header = "Editar carta";
-                        itemMenu.Tag = cartaACargar;
-                        itemMenu.Click += (s, e) =>
-                        {
-                            Image imgCartaAEditar = ((MenuItem)s).Tag as Image;
-                            CartaTarot cartaAEditar = imgCartaAEditar.Tag as CartaTarot;
-                        //abro el editor de cartas con la carta
-                        new WinEditorCreadorCartas(cartaAEditar).ShowDialog();
-                        //si a cambiado la imagen la actualizo
-                        imgCartaAEditar.SetImage(cartaAEditar.Imagen);
-                            CartaTarot.GuardarCarta(cartaAEditar);//actualizo los datos
-                    };
-                        contextMenuCartas.Items.Add(itemMenu);
-
-
-                        cartaACargar.SetImage(cartasCargadas[i].Imagen);
-                        cartaACargar.Tag = cartasCargadas[i];
-                        cartaACargar.MouseLeftButtonUp += PonCarta;
-                        cartaACargar.ContextMenu = contextMenuCartas;
-                        ugCartasTarot.Children.Add(cartaACargar);
-                        if (!System.IO.File.Exists(CartaTarot.pathCartasCarpetaGuardado + System.IO.Path.AltDirectorySeparatorChar + cartasCargadas[i].Nombre + CartaTarot.ExtensionCarta))
-                            CartaTarot.GuardarCarta(cartasCargadas[i]);
-                    }
+                    nombreCarta = cartasCargadas[i].Nombre;
+                    CargarCarta(cartasCargadas[i]);
                 }
+            }
+        }
+
+        private void CargarCarta(CartaTarot cartasCargada)
+        {
+            Image cartaACargar;
+            ContextMenu contextMenuCartas;
+            MenuItem itemMenu;
+            if (!this.cartasCargadas.Existeix(cartasCargada.Nombre))
+            {
+                this.cartasCargadas.Afegir(cartasCargada.Nombre, cartasCargada);
+                contextMenuCartas = new ContextMenu();
+                cartaACargar = new Image();
+                itemMenu = new MenuItem();
+                itemMenu.Header = "Crear Carta";
+                itemMenu.Click += CreadorDeCartas;
+                contextMenuCartas.Items.Add(itemMenu);
+
+                itemMenu = new MenuItem();
+                itemMenu.Header = "Editar carta";
+                itemMenu.Tag = cartaACargar;
+                itemMenu.Click += (s, e) =>
+                {
+                    Image imgCartaAEditar = ((MenuItem)s).Tag as Image;
+                    CartaTarot cartaAEditar = imgCartaAEditar.Tag as CartaTarot;
+                    //abro el editor de cartas con la carta
+                    new WinEditorCreadorCartas(cartaAEditar).ShowDialog();
+                    //si a cambiado la imagen la actualizo
+                    imgCartaAEditar.SetImage(cartaAEditar.Imagen);
+                    CartaTarot.GuardarCarta(cartaAEditar);//actualizo los datos
+                    ugCartasTarot.Children.Sort();
+                };
+                contextMenuCartas.Items.Add(itemMenu);
+
+
+                cartaACargar.SetImage(cartasCargada.Imagen);
+                cartaACargar.Tag = cartasCargada;
+                cartaACargar.MouseLeftButtonUp += PonCarta;
+                cartaACargar.ContextMenu = contextMenuCartas;
+                ugCartasTarot.Children.Add(cartaACargar);
+                if (!System.IO.File.Exists(CartaTarot.pathCartasCarpetaGuardado + System.IO.Path.AltDirectorySeparatorChar + cartasCargada.Nombre + CartaTarot.ExtensionCarta))
+                    CartaTarot.GuardarCarta(cartasCargada);
             }
         }
 
         private void PonCarta(object sender, MouseButtonEventArgs e)
         {
-            bool cartaPuesta = false;
+            bool acabado = false;
+
             Image imgSender = sender as Image;
-            //miro que no este puesta...
-            for (PosicionCartas i = PosicionCartas.Pasado; i <= PosicionCartas.Futuro && !cartaPuesta; i++)
-                cartaPuesta = Equals(imgs[(int)i].Tag, imgSender.Tag);
-            if (cartaPuesta)
+            //miro que no este puesta
+            for (PosicionCartas i = PosicionCartas.Pasado; i <= PosicionCartas.Futuro && !acabado; i++)
             {
-                if (MessageBox.Show("La carta ya esta en la tirada actualmente, la quieres quitar de la posicion donde esta?", "Carta puesta", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+
+                if (Equals(imgs[(int)i].Tag, imgSender.Tag))
                 {
-                    cartaPuesta = false;
-                    for (PosicionCartas i = PosicionCartas.Pasado; i <= PosicionCartas.Futuro && !cartaPuesta; i++)
-                    {
-                        cartaPuesta = Equals(imgs[(int)i].Tag, imgSender.Tag);
-                        if (cartaPuesta)
-                        {
-                            QuitarCartaDeLaTirada(imgs[(int)i]);
-                        }
-                    }
-                    cartaPuesta = false;
-                    SiNoEstaPuestaPonlaEnLaPosicion(cartaPuesta, imgSender);
+                    QuitarCartaDeLaTirada(imgs[(int)i]);
+                    SiNoEstaPuestaPonlaEnLaPosicion(acabado, imgSender);
+                    acabado = true;
                 }
+
             }
-            else
+            if (!acabado)
             {
                 //se pone en la primera imagen con tag==null
-                for (PosicionCartas i = PosicionCartas.Pasado; i <= PosicionCartas.Futuro && !cartaPuesta; i++)
+                for (PosicionCartas i = PosicionCartas.Pasado; i <= PosicionCartas.Futuro && !acabado; i++)
                     if (imgs[(int)i].Tag == null)
                     {
                         imgs[(int)i].Source = imgSender.Source;
                         imgs[(int)i].Tag = imgSender.Tag;
-                        cartaPuesta = true;
+                        acabado = true;
                         posicionActual = (PosicionCartas)(((int)i + 1) % ((int)PosicionCartas.Futuro + 1));
                     }
-                SiNoEstaPuestaPonlaEnLaPosicion(cartaPuesta, imgSender);
+                SiNoEstaPuestaPonlaEnLaPosicion(acabado, imgSender);
             }
         }
 

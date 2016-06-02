@@ -161,6 +161,8 @@ namespace InterpreteTarot
         {
             get
             {
+                if (signos[0] == null)
+                    signos[0] = new Bitmap(1, 1);
                 return signos[0];
             }
 
@@ -173,6 +175,8 @@ namespace InterpreteTarot
         {
             get
             {
+                if (signos[1] == null)
+                    signos[1] = new Bitmap(1, 1);
                 return signos[1];
             }
 
@@ -185,6 +189,8 @@ namespace InterpreteTarot
         {
             get
             {
+                if (signos[2] == null)
+                    signos[2] = new Bitmap(1, 1);
                 return signos[2];
             }
 
@@ -270,7 +276,8 @@ namespace InterpreteTarot
             Estacion = (string)campos[8];
             FechaInicio = (DateTime)campos[9];
             FechaFin = (DateTime)campos[10];
-            signos=((object[]) campos[11]).Casting<Bitmap>().ToArray();
+            signos = ((object[])campos[11]).Casting<Bitmap>().ToArray();
+
         }
 
         public int CompareTo(object obj)

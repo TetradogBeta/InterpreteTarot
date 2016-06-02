@@ -64,7 +64,8 @@ namespace InterpreteTarot
             }
             lstPalabrasClave.Items.Clear();
             lstPalabrasClave.Items.AddRange(carta.PalabrasClave.Split('·'));
-            
+            scrPosicion.ScrollToTop();
+            scrSignificado.ScrollToTop();
         }
     }
 }

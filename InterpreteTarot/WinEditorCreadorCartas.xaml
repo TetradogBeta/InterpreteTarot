@@ -5,8 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InterpreteTarot"
         mc:Ignorable="d"
-        Title="WinEditorCreadorCartas" Height="300" Width="300">
+        Title="Editor Creador Cartas" Height="313.598" Width="438.527">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="28*"/>
+            <RowDefinition Height="229*"/>
+            <RowDefinition Height="27*"/>
+        </Grid.RowDefinitions>
+        <Viewbox Grid.Row="0">
+            <TextBox x:Name="txtNombreCarta" Text="Nombre Carta"/>
+        </Viewbox>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="170*"/>
+                    <RowDefinition Height="31*"/>
+                </Grid.RowDefinitions>
+                <Image Name="imgCarta" Grid.Row="0" MouseLeftButtonUp="CambiarImagen_MouseLeftButtonUp"/>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Name="imgSigno1" MouseLeftButtonUp="CambiarImagen_MouseLeftButtonUp" />
+                    <Image Grid.Column="1" Name="imgSigno2" MouseLeftButtonUp="CambiarImagen_MouseLeftButtonUp" />
+                    <Image Grid.Column="2" Name="imgSigno3" MouseLeftButtonUp="CambiarImagen_MouseLeftButtonUp" />
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="69*"/>
+                    <RowDefinition Height="160*"/>
+                </Grid.RowDefinitions>
+                <UniformGrid>
+                    <RadioButton x:Name="rbSignificado" Content="Significado" GroupName="txt" IsChecked="True" Checked="CambiarTexto_Checked"/>
+                    <RadioButton x:Name="rbPasado" Content="Pasado" GroupName="txt" Checked="CambiarTexto_Checked" />
+                    <RadioButton x:Name="rbPresente" Content="Presente" GroupName="txt" Checked="CambiarTexto_Checked" />
+                    <RadioButton x:Name="rbFuturo" Content="Futuro" GroupName="txt" Checked="CambiarTexto_Checked" />
+                </UniformGrid>
+                <TextBox Grid.Row="1" x:Name="txt" TextWrapping="Wrap" Text="Descripción Sección seleccionada" />
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="267*"/>
+                <ColumnDefinition Width="82*"/>
+                <ColumnDefinition Width="82*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="txtPalabrasClave" Text="PALABRAS·CLAVE"/>
+            <Button x:Name="btnGuardar" Grid.Column="1" Content="Guardar" Click="btnGuardar_Click"/>
+            <Button x:Name="btnSalirSinGuardar" Grid.Column="2" Content="Salir"/>
+        </Grid>
     </Grid>
 </Window>
