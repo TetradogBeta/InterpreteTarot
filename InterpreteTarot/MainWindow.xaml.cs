@@ -106,7 +106,11 @@ namespace InterpreteTarot
                 for (int i = 0; i < cartasCargadas.Length; i++)
                 {
                     nombreCarta = cartasCargadas[i].Nombre;
-                    CargarCarta(cartasCargadas[i]);
+                    try
+                    {
+                        CargarCarta(cartasCargadas[i]);
+                    }
+                    catch { }
                 }
             }
         }

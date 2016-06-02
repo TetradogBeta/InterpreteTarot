@@ -14,6 +14,7 @@ namespace InterpreteTarot
         {
             ArcanoMayor, Oro, Copa, Espada
         }
+        static Bitmap bmpBasic = new Bitmap(Color.White.ToMediaColor().ToBitmap(1, 1).ToStream(System.Drawing.Imaging.ImageFormat.Jpeg));
         static string[] numerosFiguras = "As;Dos;Tres;Cuatro;Cinco;Seis;Siete;Ocho;Nueve;Diez;Sota;Caballo;Reina;Rey".Split(';');
         public static string ExtensionCarta = ".CartaTarot";
         public static readonly string pathCartasCarpetaGuardado= Environment.CurrentDirectory + Path.AltDirectorySeparatorChar + "Cartas";
@@ -83,6 +84,7 @@ namespace InterpreteTarot
         {
             get
             {
+                if (imagen == null) imagen = bmpBasic.Clone() as Bitmap;
                 return imagen;
             }
 
@@ -162,7 +164,7 @@ namespace InterpreteTarot
             get
             {
                 if (signos[0] == null)
-                    signos[0] = new Bitmap(1, 1);
+                    signos[0] = bmpBasic.Clone() as Bitmap;
                 return signos[0];
             }
 
@@ -176,7 +178,7 @@ namespace InterpreteTarot
             get
             {
                 if (signos[1] == null)
-                    signos[1] = new Bitmap(1, 1);
+                    signos[1] = bmpBasic.Clone() as Bitmap;
                 return signos[1];
             }
 
@@ -190,7 +192,7 @@ namespace InterpreteTarot
             get
             {
                 if (signos[2] == null)
-                    signos[2] = new Bitmap(1, 1);
+                    signos[2] = bmpBasic.Clone() as Bitmap;
                 return signos[2];
             }
 

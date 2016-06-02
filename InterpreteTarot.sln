@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterpreteTarot", "InterpreteTarot\InterpreteTarot.csproj", "{DE3101A3-8B5A-4E8A-9B88-3272C8FAE94F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gabriel.Cat.Binaris", "C:\Users\pc\Desktop\Programas\Gabriel.Cat.Binaris\Gabriel.Cat.Binaris.csproj", "{743A824E-7436-45EE-8DD5-9C6EFCF58E47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gabriel.Cat.Utilitats", "C:\Users\pc\Desktop\Programas\Gabriel.Cat.Utilitats\Gabriel.Cat.Utilitats\Gabriel.Cat.Utilitats.csproj", "{6FDF9BB1-AE07-4820-BEEE-A2F52CFBE770}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{DE3101A3-8B5A-4E8A-9B88-3272C8FAE94F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE3101A3-8B5A-4E8A-9B88-3272C8FAE94F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE3101A3-8B5A-4E8A-9B88-3272C8FAE94F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{743A824E-7436-45EE-8DD5-9C6EFCF58E47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{743A824E-7436-45EE-8DD5-9C6EFCF58E47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{743A824E-7436-45EE-8DD5-9C6EFCF58E47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{743A824E-7436-45EE-8DD5-9C6EFCF58E47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FDF9BB1-AE07-4820-BEEE-A2F52CFBE770}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FDF9BB1-AE07-4820-BEEE-A2F52CFBE770}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FDF9BB1-AE07-4820-BEEE-A2F52CFBE770}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FDF9BB1-AE07-4820-BEEE-A2F52CFBE770}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

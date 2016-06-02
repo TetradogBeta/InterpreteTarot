@@ -31,6 +31,7 @@ namespace InterpreteTarot
         public WinEditorCreadorCartas()
         {
             cartaTemp = new CartaTarot();
+            carta = new CartaTarot();
             blockActual = BlockText.Significado;
             InitializeComponent();
            
