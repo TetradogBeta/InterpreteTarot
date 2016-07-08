@@ -115,14 +115,14 @@ namespace InterpreteTarot
             }
         }
 
-        private void CargarCarta(CartaTarot cartasCargada)
+        private void CargarCarta(CartaTarot cartaCargada)
         {
             Image cartaACargar;
             ContextMenu contextMenuCartas;
             MenuItem itemMenu;
-            if (!this.cartasCargadas.Existeix(cartasCargada.Nombre))
+            if (cartaCargada!=null&&!this.cartasCargadas.Existeix(cartaCargada.Nombre))
             {
-                this.cartasCargadas.Afegir(cartasCargada.Nombre, cartasCargada);
+                this.cartasCargadas.Afegir(cartaCargada.Nombre, cartaCargada);
                 contextMenuCartas = new ContextMenu();
                 cartaACargar = new Image();
                 itemMenu = new MenuItem();
@@ -142,18 +142,18 @@ namespace InterpreteTarot
                     //si a cambiado la imagen la actualizo
                     imgCartaAEditar.SetImage(cartaAEditar.Imagen);
                     CartaTarot.GuardarCarta(cartaAEditar);//actualizo los datos
-                    ugCartasTarot.Children.Sort();
+                 
                 };
                 contextMenuCartas.Items.Add(itemMenu);
 
 
-                cartaACargar.SetImage(cartasCargada.Imagen);
-                cartaACargar.Tag = cartasCargada;
+                cartaACargar.SetImage(cartaCargada.Imagen);
+                cartaACargar.Tag = cartaCargada;
                 cartaACargar.MouseLeftButtonUp += PonCarta;
                 cartaACargar.ContextMenu = contextMenuCartas;
                 ugCartasTarot.Children.Add(cartaACargar);
-                if (!System.IO.File.Exists(CartaTarot.pathCartasCarpetaGuardado + System.IO.Path.AltDirectorySeparatorChar + cartasCargada.Nombre + CartaTarot.ExtensionCarta))
-                    CartaTarot.GuardarCarta(cartasCargada);
+                if (!System.IO.File.Exists(CartaTarot.pathCartasCarpetaGuardado + System.IO.Path.AltDirectorySeparatorChar + cartaCargada.Nombre + CartaTarot.ExtensionCarta))
+                    CartaTarot.GuardarCarta(cartaCargada);
             }
         }
 
